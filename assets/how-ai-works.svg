@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330" width="800" height="330" role="img" aria-labelledby="t d">
+  <title id="t">How AI works</title>
+  <desc id="d">Examples go into training. Training produces a model. The model takes a new input and produces an output. A human checks the output. Corrections feed back into training.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1b2440"/>
+    </marker>
+    <style>
+      .box { fill: #ffffff; stroke: #1b2440; stroke-width: 2; }
+      .human { fill: #ffe66b; stroke: #1b2440; stroke-width: 3; }
+      .t { font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 17px; font-weight: 700; fill: #1b2440; text-anchor: middle; }
+      .s { font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 13px; fill: #4a5470; text-anchor: middle; }
+      .line { stroke: #1b2440; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #1b2440; stroke-width: 2; fill: none; stroke-dasharray: 6 5; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <!-- feedback loop -->
+  <path class="dash" d="M720,110 V45 H240 V102"/>
+  <text class="s" x="480" y="36">corrections improve the next version</text>
+
+  <!-- 1 examples -->
+  <rect class="box" x="20" y="110" width="130" height="80" rx="8"/>
+  <text class="t" x="85" y="145">Examples</text>
+  <text class="s" x="85" y="167">text, images, data</text>
+
+  <!-- 2 training -->
+  <rect class="box" x="175" y="110" width="130" height="80" rx="8"/>
+  <text class="t" x="240" y="145">Training</text>
+  <text class="s" x="240" y="167">finds patterns</text>
+
+  <!-- 3 model -->
+  <rect class="box" x="330" y="110" width="130" height="80" rx="8"/>
+  <text class="t" x="395" y="145">Model</text>
+  <text class="s" x="395" y="167">stores the patterns</text>
+
+  <!-- 4 output -->
+  <rect class="box" x="485" y="110" width="140" height="80" rx="8"/>
+  <text class="t" x="555" y="145">Output</text>
+  <text class="s" x="555" y="167">answer, image, action</text>
+
+  <!-- 5 human check -->
+  <rect class="human" x="650" y="110" width="130" height="80" rx="8"/>
+  <text class="t" x="715" y="145">Human check</text>
+  <text class="s" x="715" y="167" style="fill:#1b2440">right? safe? fair?</text>
+
+  <!-- arrows -->
+  <path class="line" d="M150,150 H173"/>
+  <path class="line" d="M305,150 H328"/>
+  <path class="line" d="M460,150 H483"/>
+  <path class="line" d="M625,150 H648"/>
+
+  <!-- new input -->
+  <rect class="box" x="330" y="245" width="130" height="60" rx="8"/>
+  <text class="t" x="395" y="272">New input</text>
+  <text class="s" x="395" y="292">your question</text>
+  <path class="line" d="M395,245 V192"/>
+</svg>

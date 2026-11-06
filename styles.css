@@ -1,0 +1,189 @@
+/* ===== Design tokens ===== */
+:root {
+  --paper: #f6f8fb;        /* page background, like notebook paper */
+  --grid: #e3e9f2;         /* faint grid lines */
+  --ink: #1b2440;          /* main text, deep navy */
+  --ink-soft: #4a5470;     /* secondary text */
+  --link: #2741b8;         /* links */
+  --fact: #ffe66b;         /* yellow highlighter */
+  --view: #b5e6f2;         /* blue highlighter */
+  --prediction: #ffc8e1;   /* pink highlighter */
+  --focus: #2741b8;
+
+  --font-body: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-head: "Bricolage Grotesque", system-ui, sans-serif;
+  --measure: 68ch;         /* comfortable line length */
+  color-scheme: light;
+}
+
+/* ===== Base ===== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--paper);
+  /* Notebook grid made with two repeating gradients */
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.1; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.1rem); margin: 0 0 1rem; }
+h3 { font-size: 1.2rem; margin: 0 0 .5rem; }
+
+a { color: var(--link); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+img { max-width: 100%; height: auto; }
+code { font-size: .9em; background: #fff; padding: 0 .25em; border-radius: 3px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link { position: absolute; left: 1rem; top: -3rem; background: var(--ink); color: #fff; padding: .5rem 1rem; z-index: 10; }
+.skip-link:focus { top: 1rem; }
+
+/* ===== Header and navigation ===== */
+.site-header {
+  position: sticky; top: 0; z-index: 5;
+  background: rgba(246, 248, 251, .95);
+  border-bottom: 1px solid var(--grid);
+}
+.site-header ul {
+  display: flex; gap: 1.25rem;
+  max-width: var(--measure); margin: 0 auto; padding: .75rem 1rem;
+  list-style: none;
+  overflow-x: auto;              /* scrolls sideways on small screens */
+  white-space: nowrap;
+}
+.site-header a { color: var(--ink); text-decoration: none; font-size: .95rem; }
+.site-header a:hover { text-decoration: underline; }
+
+/* ===== Layout ===== */
+main, .site-footer { max-width: var(--measure); margin: 0 auto; padding: 0 1rem; }
+section { padding: 3rem 0 1rem; }
+
+/* ===== Hero ===== */
+.hero { padding-top: 4rem; }
+.hero h1 {
+  font-size: clamp(2.6rem, 9vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin: 0 0 1rem;
+}
+.lede { font-size: 1.3rem; color: var(--ink-soft); max-width: 40ch; margin: 0 0 2rem; }
+
+/* Highlighter legend / toggle buttons */
+.key { background: #fff; border: 1px solid var(--grid); padding: 1rem 1.25rem; border-radius: 6px; }
+.key p { margin: 0 0 .75rem; font-size: 1rem; }
+.key-btn {
+  font: inherit; font-size: 1rem; color: var(--ink);
+  border: 2px solid var(--ink); border-radius: 4px;
+  padding: .35rem .8rem; margin: 0 .4rem .4rem 0;
+  cursor: pointer; background: #fff;
+}
+.key-btn.fact[aria-pressed="true"] { background: var(--fact); }
+.key-btn.view[aria-pressed="true"] { background: var(--view); }
+.key-btn.prediction[aria-pressed="true"] { background: var(--prediction); }
+.key-btn[aria-pressed="false"] { text-decoration: line-through; color: var(--ink-soft); border-style: dashed; }
+
+/* ===== Highlighted claims =====
+   Colour AND underline style differ, so meaning is not carried by colour alone. */
+.claim {
+  padding: .05em .15em;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: background-color .3s;
+}
+.claim.fact       { background: var(--fact);       text-decoration-line: underline; text-decoration-style: solid; }
+.claim.view       { background: var(--view);       text-decoration-line: underline; text-decoration-style: dotted; }
+.claim.prediction { background: var(--prediction); text-decoration-line: underline; text-decoration-style: wavy; }
+
+/* When a button is switched off, script.js adds a class to <body> */
+body.hide-fact .claim.fact,
+body.hide-view .claim.view,
+body.hide-prediction .claim.prediction { background: transparent; text-decoration-line: none; }
+
+/* Small source links after each fact */
+.cite { font-size: .8rem; white-space: nowrap; }
+.cite::before { content: "["; color: var(--ink-soft); }
+.cite::after  { content: "]"; color: var(--ink-soft); }
+
+/* ===== Figures ===== */
+figure { margin: 2rem 0; }
+figure img { display: block; margin: 0 auto; background: #fff; border: 1px solid var(--grid); border-radius: 6px; }
+figcaption { font-size: .95rem; color: var(--ink-soft); margin-top: .5rem; }
+
+/* ===== Lists ===== */
+.benefits, .futures { padding-left: 1.2rem; }
+.benefits li, .futures li { margin-bottom: 1rem; }
+
+/* ===== Case studies (details/summary) ===== */
+.cases details {
+  background: #fff;
+  border: 1px solid var(--grid);
+  border-left: 5px solid var(--ink);
+  border-radius: 4px;
+  margin-bottom: .75rem;
+}
+.cases summary {
+  cursor: pointer;
+  padding: .9rem 1.1rem;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+.cases details[open] summary { border-bottom: 1px solid var(--grid); }
+.cases details p { padding: 0 1.1rem; }
+.lesson::before { content: "Lesson: "; font-weight: 700; }
+
+/* ===== Bar chart (pure HTML + CSS) ===== */
+.chart { background: #fff; border: 1px solid var(--grid); border-radius: 6px; padding: 1.25rem; }
+.bar-row { display: grid; grid-template-columns: 3.5rem 1fr; align-items: center; gap: .75rem; margin-bottom: .75rem; }
+.bar-label { font-weight: 700; }
+.bar {
+  min-width: 9rem;
+  background: var(--ink);
+  color: #fff;
+  padding: .45rem .6rem;
+  border-radius: 3px;
+  font-size: .95rem;
+}
+/* Bar length is proportional to the value: 945 TWh = 100%, so 415 TWh = 44% */
+.bar-2024 { width: 44%; }
+.bar-2030 { width: 100%; }
+.bar.projected {
+  background: repeating-linear-gradient(45deg, var(--ink) 0 8px, #3a4a78 8px 16px);
+}
+
+/* ===== Rules callout ===== */
+.rules { background: #fff; border: 2px solid var(--ink); border-radius: 6px; padding: 1rem 1.25rem; margin-top: 2rem; }
+.rules ul { margin: 0; padding-left: 1.2rem; }
+
+/* ===== Footer ===== */
+.site-footer { padding-top: 3rem; padding-bottom: 4rem; border-top: 2px solid var(--ink); margin-top: 3rem; }
+.site-footer h2 { font-size: 1.4rem; }
+.sources { font-size: .95rem; padding-left: 1.4rem; }
+.sources li { margin-bottom: .5rem; }
+.ack { background: #fff; border: 1px dashed var(--ink-soft); padding: 1rem; border-radius: 6px; }
+
+/* ===== Respect people who prefer less motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .claim { transition: none; }
+}

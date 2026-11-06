@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 520" width="340" height="520" role="img" aria-labelledby="t d">
+  <title id="t">How AI works</title>
+  <desc id="d">Examples go into training. Training produces a model. The model takes a new input and produces an output. A human checks the output. Corrections feed back into training.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1b2440"/>
+    </marker>
+    <style>
+      .box { fill: #ffffff; stroke: #1b2440; stroke-width: 2; }
+      .human { fill: #ffe66b; stroke: #1b2440; stroke-width: 3; }
+      .t { font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 18px; font-weight: 700; fill: #1b2440; }
+      .s { font-family: "Atkinson Hyperlegible", Arial, sans-serif; font-size: 14px; fill: #4a5470; }
+      .line { stroke: #1b2440; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #1b2440; stroke-width: 2; fill: none; stroke-dasharray: 6 5; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <!-- vertical stack: x=20..230, each box 64 tall, gap 34 -->
+  <rect class="box" x="20" y="10" width="210" height="64" rx="8"/>
+  <text class="t" x="36" y="38">Examples</text><text class="s" x="36" y="60">text, images, data</text>
+
+  <rect class="box" x="20" y="108" width="210" height="64" rx="8"/>
+  <text class="t" x="36" y="136">Training</text><text class="s" x="36" y="158">finds patterns</text>
+
+  <rect class="box" x="20" y="206" width="210" height="64" rx="8"/>
+  <text class="t" x="36" y="234">Model</text><text class="s" x="36" y="256">stores the patterns</text>
+
+  <rect class="box" x="20" y="304" width="210" height="64" rx="8"/>
+  <text class="t" x="36" y="332">Output</text><text class="s" x="36" y="354">answer, image, action</text>
+
+  <rect class="human" x="20" y="402" width="210" height="64" rx="8"/>
+  <text class="t" x="36" y="430">Human check</text><text class="s" x="36" y="452" style="fill:#1b2440">right? safe? fair?</text>
+
+  <path class="line" d="M125,74 V106"/>
+  <path class="line" d="M125,172 V204"/>
+  <path class="line" d="M125,270 V302"/>
+  <path class="line" d="M125,368 V400"/>
+
+  <!-- new input joins the model from the right -->
+  <text class="t" x="250" y="232" style="font-size:15px">New</text>
+  <text class="t" x="250" y="250" style="font-size:15px">input</text>
+  <path class="line" d="M248,238 H232"/>
+
+  <!-- feedback loop on the right -->
+  <path class="dash" d="M230,445 H315 V140 H232"/>
+  <text class="s" x="20" y="500">Dashed line: corrections improve the next version.</text>
+</svg>
